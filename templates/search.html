@@ -1,0 +1,69 @@
+<!-- search.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Google Search</title>
+    <style>
+        body {
+            margin: 20px;
+        }
+
+        .search-container {
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .home-button {
+            font-size: 16px;
+            text-decoration: none;
+            color: #1a0dab; /* Use the blue color from index.html */
+            margin-right: 20px;
+        }
+
+        .search-bar {
+            width: 300px; /* Adjust the width as needed */
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #dfe1e5;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .search-button {
+            font-size: 16px;
+            border-radius: 20px;
+            background-color: #1a0dab; /* Use the blue color from index.html */
+            color: #fff;
+            padding: 10px 20px;
+            border: 1px solid #1a0dab; /* Border color to match the background color */
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .results-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-button">Home</a>
+    <div class="search-container">
+        <form action="/search" method="post">
+            <input type="text" name="query" placeholder="Google Search" class="search-bar" value="{{ query }}">
+            <input type="submit" value="Search" class="search-button">
+        </form>
+    </div>
+    <div class="results-container">
+        {% if query %}
+            <p>Search results for: <strong>{{ query }}</strong></p>
+        {% endif %}
+        {% for result in results %}
+            <h2><a href="{{ result.url }}">{{ result.title }}</a></h2>
+            <p>{{ result.snippet }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
